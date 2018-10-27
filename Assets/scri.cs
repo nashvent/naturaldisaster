@@ -18,4 +18,20 @@ public class scri : MonoBehaviour {
     {
         spinValue = -spinValue; 
     }
+
+    public void EntrarMeteorito()
+    {
+        //spinValue = -spinValue;
+    }
+
+    public void EntrarTsunami()
+    {
+        //spinValue = -spinValue;
+    }
+
+    public void EntrarTerremoto()
+    {
+        //spinValue = -spinValue;
+    }
+
 }
