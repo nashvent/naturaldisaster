@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class VRLookWalk : MonoBehaviour {
     public Transform vrCamera;
-    public float toggleAngle = 30.0f;
-    public float speed = 3.0f;
+    public float toggleAngle = 20.0f;
+    public float speed = 5.0f;
     public bool moveForward;
     private CharacterController cc;
     

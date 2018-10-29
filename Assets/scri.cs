@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class scri : MonoBehaviour {
     public float spinValue=90;
@@ -21,7 +23,7 @@ public class scri : MonoBehaviour {
 
     public void EntrarMeteorito()
     {
-        //spinValue = -spinValue;
+        SceneManager.LoadScene("MundoMeteorito");
     }
 
     public void EntrarTsunami()
