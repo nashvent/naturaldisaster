@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main.unity
     guid: c83fc7fa3f40c944c8000208920c6f37
+  - enabled: 1
+    path: Assets/MundoMeteorito.unity
+    guid: 13f3316306897154f9121b9a0199cebb
   m_configObjects: {}
