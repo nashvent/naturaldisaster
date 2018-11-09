@@ -15,6 +15,7 @@ public class NetworkManager : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.5f);
         socket.Emit("player connect");
+        
     }
 	// Update is called once per frame
 	void Update () {
