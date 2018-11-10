@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   socket: {fileID: 986313548}
+  cube: {fileID: 0}
 --- !u!4 &323378765
 Transform:
   m_ObjectHideFlags: 0
