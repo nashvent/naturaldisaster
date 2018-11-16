@@ -26,7 +26,7 @@ public class scri : MonoBehaviour {
 
     public void EntrarMeteorito()
     {
-        SceneManager.LoadScene("MundoMeteorito");
+        //SceneManager.LoadScene("MundoMeteorito");
     }
     public void VerMeteorito()
     {
