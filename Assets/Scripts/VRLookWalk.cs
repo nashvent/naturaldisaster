@@ -12,7 +12,7 @@ public class VRLookWalk : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         cc = GetComponent<CharacterController>();
-        Debug.Log("Hola");
+        
 	}
 	
 	// Update is called once per frame

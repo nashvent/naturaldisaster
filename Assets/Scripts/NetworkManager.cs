@@ -10,23 +10,20 @@ public class NetworkManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         StartCoroutine(ConnectToServer());
-
         cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cube.transform.position = new Vector3(3, 3, 3);
-
-
-
+        socket.On("movimiento", TestBoop);
     }
 	
     IEnumerator ConnectToServer()
     {
         yield return new WaitForSeconds(0.5f);
         socket.Emit("player connect");
-        
     }
 	// Update is called once per frame
 	void Update () {
         StartCoroutine(updatePosition());
+        //StartCoroutine(messageServer());
     }
 
     IEnumerator updatePosition()
@@ -43,16 +40,19 @@ public class NetworkManager : MonoBehaviour {
 
     }
 
-    public void mensaje(string msj)
+    public void TestBoop(SocketIOEvent e)
     {
-
+        //Debug.Log("Ando reviciendo");
+        Debug.Log(string.Format("[ data: {0}]", e));
     }
 
     IEnumerator messageServer()
     {
         yield return new WaitForSeconds(0.5f);
-        //socket.On('connect',mensaje);
+        socket.On("conectado", TestBoop);
+        Debug.Log("pasnando mssagver");
     }
 
 
 }
+    
