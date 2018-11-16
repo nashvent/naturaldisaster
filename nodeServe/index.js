@@ -12,15 +12,11 @@ var clients=[];
 var players={};
 var posID=0;
 
-var pruebaPlayer={};
-pruebaPlayer.name="nasho";
-pruebaPlayer.posID=0;
-pruebaPlayer.position={x:4,y:2.8,z:4};
-clients.push(pruebaPlayer);
 io.on('connection',function (socket){
 	var currentPlayer={};
 	currentPlayer.name="G"+socket.id;
 	currentPlayer.posID=clients.length;
+	currentPlayer.socketID=socket.id;
 	clients.push(currentPlayer);
 	
 	socket.on('player connect',function(){
@@ -32,11 +28,12 @@ io.on('connection',function (socket){
 	});
 
 	socket.on('cposition',function(data){
-		//currentPlayer.data=data;
 		clients[currentPlayer.posID].position=data;
 		nclients=[];
 		for(var i=0;i<clients.length;i++){
-			nclients.push(clients[i]);
+			if(socket.id!=clients[i].socketID){
+				nclients.push(clients[i]);	
+			}
 		}
 		socket.emit('pmovimiento',{nclients});
 		console.log(data);
