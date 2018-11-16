@@ -37,6 +37,7 @@ public class scri : MonoBehaviour {
     public void EntrarTsunami()
     {
         //spinValue = -spinValue;
+        SceneManager.LoadScene("MundoPrueba");
     }
 
     public void VerTsunami()
