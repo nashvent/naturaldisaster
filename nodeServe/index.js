@@ -11,33 +11,41 @@ app.get('/',function(req,res){
 var clients=[];
 var players={};
 var posID=0;
+
+var pruebaPlayer={};
+pruebaPlayer.name="nasho";
+pruebaPlayer.posID=0;
+pruebaPlayer.position={x:4,y:2.8,z:4};
+clients.push(pruebaPlayer);
 io.on('connection',function (socket){
 	var currentPlayer={};
 	currentPlayer.name="G"+socket.id;
-	currentPlayer.posID=posID;
+	currentPlayer.posID=clients.length;
 	clients.push(currentPlayer);
-	posID++	;
 	
 	socket.on('player connect',function(){
 		console.log('JUgador conectado');
 		for(var i=0;i<clients.length;i++){
 			console.log("J: ",JSON.stringify(clients[i]));
 		}
-		socket.emit('boop',{hola:'qhay'});
+		//socket.emit('pmovimiento');
 	});
 
-	socket.on('position',function(data){
+	socket.on('cposition',function(data){
 		//currentPlayer.data=data;
 		clients[currentPlayer.posID].position=data;
-		socket.emit('movimiento',clients);
+		nclients=[];
+		for(var i=0;i<clients.length;i++){
+			nclients.push(clients[i]);
+		}
+		socket.emit('pmovimiento',{nclients});
+		console.log(data);
 	});
 
-
-
-	
 
 	socket.on('disconnect',function(){
 		console.log('JUgador desconecta');
+
 	});
 
 

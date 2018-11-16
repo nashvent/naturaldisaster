@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SocketIO;
-
+using System.Globalization;
 
 public class NetworkManager : MonoBehaviour {
     public SocketIOComponent socket;
-    public GameObject cube;
+    
+    public List<GameObject> GamePlayers;
+    float contPos = 0;
+    //public GameObject cube;
     // Use this for initialization
     void Start () {
         StartCoroutine(ConnectToServer());
-        cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.transform.position = new Vector3(3, 3, 3);
-        socket.On("movimiento", TestBoop);
+        socket.On("pmovimiento", drawMovimiento);
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject nG= GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GamePlayers.Add(nG);
+            GamePlayers[i].transform.position = new Vector3(3+i, 3, 3+i);
+        }
     }
 	
     IEnumerator ConnectToServer()
@@ -23,7 +30,6 @@ public class NetworkManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         StartCoroutine(updatePosition());
-        //StartCoroutine(messageServer());
     }
 
     IEnumerator updatePosition()
@@ -31,27 +37,30 @@ public class NetworkManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         JSONObject j = new JSONObject(JSONObject.Type.OBJECT);
         var pos = GameObject.Find("Head").transform.position;
-
         j.AddField("x", pos.x);
         j.AddField("y", pos.y);
         j.AddField("z", pos.z);
-        
-        socket.Emit("position",j);
-
+        socket.Emit("cposition",j);
     }
 
-    public void TestBoop(SocketIOEvent e)
+
+
+    public void drawMovimiento(SocketIOEvent e)
     {
-        //Debug.Log("Ando reviciendo");
-        Debug.Log(string.Format("[ data: {0}]", e));
+        //Debug.Log(string.Format("[ data: {0}]", e.data["clients"]));
+        var listClients=e.data.GetField("nclients");
+        for (int i = 0; i < listClients.list.Count; i++)
+        {
+            //Debug.Log("Player");
+            JSONObject playerData = (JSONObject)listClients.list[i];
+            var pos = playerData.GetField("position");
+            GamePlayers[i].transform.position = new Vector3( float.Parse( pos.GetField("x").ToString()), float.Parse(pos.GetField("y").ToString()), float.Parse(pos.GetField("z").ToString()));
+            //Debug.Log(playerData);
+            // Process the player key and data as you need.
+        }
+      
     }
 
-    IEnumerator messageServer()
-    {
-        yield return new WaitForSeconds(0.5f);
-        socket.On("conectado", TestBoop);
-        Debug.Log("pasnando mssagver");
-    }
 
 
 }
