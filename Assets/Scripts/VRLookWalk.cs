@@ -8,7 +8,7 @@ public class VRLookWalk : MonoBehaviour {
     public float speed = 5.0f;
     public bool moveForward;
     private CharacterController cc;
-    
+    public float distancia = 3f;
     // Use this for initialization
 	void Start () {
         cc = GetComponent<CharacterController>();
