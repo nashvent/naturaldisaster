@@ -5,9 +5,11 @@ using UnityEngine;
 public class Pickupable : MonoBehaviour {
 
     public bool capturado = false;
+    public GameObject objeto;
+    private Rigidbody rigidbody;
     // Use this for initialization
-	void Start () {
-        
+    void Start () {
+        rigidbody = GetComponent<Rigidbody>();
     }
 	
 	// Update is called once per frame
@@ -16,19 +18,21 @@ public class Pickupable : MonoBehaviour {
         {
             copyPosition();
         }
-
     }   
     
     public void copyPosition()
     {
         var pos = GameObject.Find("Head").transform.position;
-        Debug.Log(pos);
-        GameObject objeto;
         objeto = GameObject.Find("pCube");
         objeto.transform.position = new Vector3(pos[0],pos[1],pos[2]+3);        
     }
     public void capturar()
     {
         capturado = !capturado;
+        if (!capturado)
+        {
+            objeto = GameObject.Find("pCube");
+            objeto.transform.position= new Vector3(objeto.transform.position.x, objeto.transform.position.y-1, objeto.transform.position.z); 
+        }
     }
 }
