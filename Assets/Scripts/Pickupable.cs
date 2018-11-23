@@ -6,10 +6,8 @@ public class Pickupable : MonoBehaviour {
 
     public bool capturado = false;
     public GameObject objeto;
-    private Rigidbody rigidbody;
     // Use this for initialization
     void Start () {
-        rigidbody = GetComponent<Rigidbody>();
     }
 	
 	// Update is called once per frame
