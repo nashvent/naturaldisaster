@@ -186,7 +186,8 @@ MonoBehaviour:
   vrCamera: {fileID: 1670897627}
   toggleAngle: 20
   speed: 5
-  moveForward: 0
+  moveForward: 1
+  distancia: 3
 --- !u!143 &213772534
 CharacterController:
   m_ObjectHideFlags: 0
