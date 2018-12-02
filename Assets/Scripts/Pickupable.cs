@@ -2,21 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using SocketIO;
 
 public class Pickupable : MonoBehaviour {
+    public SocketIOComponent socket;
 
     public bool capturado = false;
     public bool creado = false;
     public GameObject[] all_objects;
+    int id_server;
 
     // Use this for initialization
     void Start () {
         all_objects = GameObject.FindGameObjectsWithTag("box");
+        
+        EventTrigger eventTrigger1 = this.gameObject.AddComponent<EventTrigger>();
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerClick;
+        entry.callback.AddListener((data) => { capturar(); });
+        eventTrigger1.triggers.Add(entry);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(all_objects.Length);
         if (capturado)
         {
             copyPosition();
@@ -26,7 +34,7 @@ public class Pickupable : MonoBehaviour {
        
             objetos_juntos();
         }
-
+        //updatePosition();
     }   
     
     public void copyPosition()
@@ -73,17 +81,33 @@ public class Pickupable : MonoBehaviour {
             Debug.Log("Estoy destruyendo");
             Destroy(obj);
         }
+        //new_obj.SetActive(true);
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.AddComponent<PickNew>();
         cube.transform.position = ultima_pos;
-        /*cube.AddComponent<Pickupable>();
-
-        EventTrigger eventTrigger1 = cube.AddComponent<EventTrigger>();
+        Debug.Log("OBJETO CREADO");
+        creado = true;
+        /*EventTrigger eventTrigger1 = cube.AddComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.PointerClick;
         entry.callback.AddListener((data) => { capturar(); });
-        eventTrigger1.triggers.Add(entry);
-        */
-        Debug.Log("OBJETO CREADO");
-        creado = true;
+        eventTrigger1.triggers.Add(entry);*/
+        
+    }
+
+    IEnumerator updatePosition()
+    {
+        yield return new WaitForSeconds(0.5f);
+        JSONObject j = new JSONObject(JSONObject.Type.OBJECT);
+        var pos = this.gameObject.transform.position;
+        j.AddField("x", pos.x);
+        j.AddField("y", pos.y);
+        j.AddField("z", pos.z);
+        socket.Emit("oposition", j);
+    }
+
+    void setIdserver(int val)
+    {
+        id_server = val;
     }
 }
