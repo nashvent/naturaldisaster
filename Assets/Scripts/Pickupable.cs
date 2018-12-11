@@ -16,11 +16,11 @@ public class Pickupable : MonoBehaviour {
     void Start () {
         all_objects = GameObject.FindGameObjectsWithTag("box");
         
-        EventTrigger eventTrigger1 = this.gameObject.AddComponent<EventTrigger>();
+        /*EventTrigger eventTrigger1 = this.gameObject.AddComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.PointerClick;
         entry.callback.AddListener((data) => { capturar(); });
-        eventTrigger1.triggers.Add(entry);
+        eventTrigger1.triggers.Add(entry);*/
     }
 	
 	// Update is called once per frame
@@ -48,6 +48,7 @@ public class Pickupable : MonoBehaviour {
         capturado = !capturado;
         if (!capturado)
         {
+            Debug.Log("no estoy capturado");
             this.gameObject.transform.position= new Vector3(
                 this.gameObject.transform.position.x,
                 this.gameObject.transform.position.y-1,
