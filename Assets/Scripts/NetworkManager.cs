@@ -80,12 +80,11 @@ public class NetworkManager : MonoBehaviour {
             nG.AddComponent<fallScript>();
             nG.transform.position = new Vector3(float.Parse(pos.GetField("x").ToString()), float.Parse(pos.GetField("y").ToString()), float.Parse(pos.GetField("z").ToString()));
 
-            /*GameObject ter = GameObject.Find("Terrain");
+            GameObject ter = GameObject.Find("Terrain");
             editTerrain terrain = ter.GetComponent<editTerrain>();
             StartCoroutine(delay());
 
             terrain.raiseTerrain(nG.transform.position);
-            */
             //GamePlayers[i].transform.position = new Vector3(float.Parse(pos.GetField("x").ToString()), float.Parse(pos.GetField("y").ToString()), float.Parse(pos.GetField("z").ToString()));
 
         }
