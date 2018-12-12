@@ -25,7 +25,8 @@ public class NetworkManager : MonoBehaviour {
             GamePlayers[i].transform.position = new Vector3(3+i, 3, 3+i);
         }
     }
-	
+    
+
     IEnumerator ConnectToServer()
     {
         yield return new WaitForSeconds(0.5f);
@@ -92,7 +93,8 @@ public class NetworkManager : MonoBehaviour {
             JSONObject playerData = (JSONObject)listObj.list[i];
             var pos = playerData.GetField("position");
             GameObject nG = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            
+            nG.tag = "box";
+
             var ptipo = playerData.GetField("tipo");
             int oTipo =int.Parse(ptipo.ToString());
 
@@ -108,14 +110,14 @@ public class NetworkManager : MonoBehaviour {
                 nG.GetComponent<Renderer>().material = yourMaterial;
             }
             nG.AddComponent<Pickupable>();
-            
-            var mscript = nG.GetComponent<Pickupable>();
-            //mscript.setIdserver(1);
+
+            Pickupable mscript = nG.GetComponent<Pickupable>();
+            mscript.setIdserver(i);
+
             GameObjs.Add(nG);
             GameObjs[i].transform.position = new Vector3(float.Parse(pos.GetField("x").ToString()), float.Parse(pos.GetField("y").ToString()), float.Parse(pos.GetField("z").ToString()));
         }
 
     }
-
 }
-    
+   

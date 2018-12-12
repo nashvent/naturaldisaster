@@ -16,7 +16,7 @@ var i = 0;
 while (i < 2) {
     obj1={
     	id:i,
-    	position:{x:60+(i*2),y:2,z:79+i},
+    	position:{x:60+(i*2)*2,y:2,z:79+i},
     	tipo:i%2,
     };
     objetos.push(obj1);
@@ -36,6 +36,7 @@ io.on('connection',function (socket){
 	socket.on('player connect',function(){
 		console.log('Jugador conectado');
 		socket.emit('crearobj',{objetos});
+		console.log("mi socket id ",socket.id);
 		/*
 		while(true){
 			setTimeout(raingenerate, 2000, socket);
@@ -63,8 +64,34 @@ io.on('connection',function (socket){
 		//clients.splice(currentPlayer.posID, 1);
 	});
 
+	socket.on('oposition',function(data){
+		
+		
+		var id = data.id;
+		//console.log(id);
+		objetos[id].position = {x:data.x, y:data.y, z:data.z};
+		console.log(objetos);
+		var dis = distance(objetos[0].position,objetos[1].position);
+		if(dis<3){
+			var pos = objetos[0].position;
+			console.log("distance corta",dis);
+			io.emit("ocrear",{pos})
+		}
+		else{
+			socket.broadcast.emit('omovimiento',{objetos});
+		}
+	});
+
 });
 
+function distance( v1, v2 )
+{
+    var dx = v1.x - v2.x;
+    var dy = v1.y - v2.y;
+    var dz = v1.z - v2.z;
+
+    return Math.round(Math.sqrt( dx * dx + dy * dy + dz * dz ));
+}
 
 
 var os = require( 'os' );
