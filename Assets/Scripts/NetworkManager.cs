@@ -79,10 +79,21 @@ public class NetworkManager : MonoBehaviour {
             nG.GetComponent<Renderer>().material = yourMaterial;
             nG.AddComponent<fallScript>();
             nG.transform.position = new Vector3(float.Parse(pos.GetField("x").ToString()), float.Parse(pos.GetField("y").ToString()), float.Parse(pos.GetField("z").ToString()));
+
+            /*GameObject ter = GameObject.Find("Terrain");
+            editTerrain terrain = ter.GetComponent<editTerrain>();
+            StartCoroutine(delay());
+
+            terrain.raiseTerrain(nG.transform.position);
+            */
             //GamePlayers[i].transform.position = new Vector3(float.Parse(pos.GetField("x").ToString()), float.Parse(pos.GetField("y").ToString()), float.Parse(pos.GetField("z").ToString()));
 
         }
 
+    }
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(10);
     }
 
     public void iniciarJuego(SocketIOEvent e)
