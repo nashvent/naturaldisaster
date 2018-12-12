@@ -103,6 +103,8 @@ public class Pickupable : MonoBehaviour {
         //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube.AddComponent<PickNew>();
         //cube.transform.position = ultima_pos;
+        GameObject head = GameObject.Find("Head");
+        head.transform.position = ultima_pos;
         Debug.Log("OBJETO CREADO");
         //creado = true;
               
