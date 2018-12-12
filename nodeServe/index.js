@@ -13,16 +13,23 @@ var clients=[]; //Lista de clientes
 var objetos=[]; //Lista de objetos 
 var meteoritolist=[];
 var i = 0;
+//obj1 = {id: 0,position:{x:326,y:2,z:110}, tipo:0};
+//obj2 = {id: 0,position:{x:112,y:1,z:287}, tipo:1};
+obj1 = {id: 0,position:{x:174,y:3,z:350}, tipo:0};
+obj2 = {id: 0,position:{x:180,y:3,z:365}, tipo:1};
+objetos.push(obj1);
+objetos.push(obj2);
+/*
 while (i < 2) {
     obj1={
     	id:i,
-    	position:{x:60+(i*2)*2,y:2,z:79+i},
+    	position:{x:182+(i*2)*2,y:2,z:375+i},
     	tipo:i%2,
     };
     objetos.push(obj1);
     i++;
 } 
-
+*/
 var posID=0;
 
 
@@ -73,7 +80,7 @@ io.on('connection',function (socket){
 		console.log(objetos);
 		var dis = distance(objetos[0].position,objetos[1].position);
 		if(dis<3){
-			var pos = objetos[0].position;
+			var pos = {x:305, y:1, z:420};
 			console.log("distance corta",dis);
 			io.emit("ocrear",{pos})
 		}
@@ -125,8 +132,8 @@ function randomInRange(min, max) {
 function wf(h){
 	var met={};
 	met.id=h;
-	var rndx=randomInRange(0,250);
-	var rndz=randomInRange(0,250);
+	var rndx=randomInRange(150,200);
+	var rndz=randomInRange(300,350);
 	met.position={x:rndx,y:50,z:rndz};
 	meteoritolist.push(met);
 	metlist=[met];

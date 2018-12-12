@@ -10,7 +10,7 @@ public class fallScript : MonoBehaviour {
     void Start () {
    
         Destroy(gameObject, 8);
-        transform.localScale += new Vector3(3, 3, 3);
+        transform.localScale += new Vector3(6, 6, 6);
     }
 	
 	// Update is called once per frame
