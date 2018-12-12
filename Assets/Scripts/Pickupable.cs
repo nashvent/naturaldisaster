@@ -105,6 +105,9 @@ public class Pickupable : MonoBehaviour {
         //cube.transform.position = ultima_pos;
         GameObject head = GameObject.Find("Head");
         head.transform.position = ultima_pos;
+        GameObject msj = GameObject.Find("Message");
+        TextMesh mimsj = msj.GetComponent<TextMesh>();
+        mimsj.text = "WINNERS";
         Debug.Log("OBJETO CREADO");
         //creado = true;
               
