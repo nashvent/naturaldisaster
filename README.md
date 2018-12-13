@@ -1,5 +1,9 @@
 # Natural Disasters
 Proponemos un juego en realidad virtual que recrea diferentes tipos de desastres naturales, los cuales se encuentran clasificados por medio de mundos en el menú de inicio. Cada jugador podrá elegir el mundo en el cual se desarrollara un determinado desastre natural, los mundos también actúan como sala de jugadores, puesto que la conexión en red se ejecuta al ingresar a dicho mundo. 
+![Menu](/images/menu.png)
+Captura: ![Menú del juego](url)
+![Menu](/images/mapa.png)
+Captura: ![Vista del escenario](url)
 
 ## Reglas del juego
 * La partida inicia cuando al menos se conecten 2 jugadores
@@ -9,7 +13,7 @@ Proponemos un juego en realidad virtual que recrea diferentes tipos de desastres
 * Cuando los objetos que sean manipulados por los jugadores, se junten se creara el nuevo objeto.
 * Cuando el objeto nuevo es creado, los jugadores ganan la partida.
 
-## Tecnologias utilizadas
+## Tecnologías utilizadas
 * Unity con GoogleVR vs .
 * Servidor Node JS.
 * Móvil con giroscopio por jugador.
@@ -62,4 +66,9 @@ Ejecutar Main.unity por cada jugador o instalar directamente en el celular.
 
 ## Video 
 Adjunto en el repositorio
+
+![Meteoritos](/images/destruccion.PNG)
+Captura: ![Meteoritos](url)
+![Objetos](/images/objetos.PNG)
+Captura: ![Objetos para colaborar](url)
 
